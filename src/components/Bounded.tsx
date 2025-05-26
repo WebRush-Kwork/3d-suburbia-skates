@@ -17,7 +17,7 @@ export function Bounded({
 	return (
 		<Comp
 			className={clsx(
-				'px-6 md:py-10 lg:py-12 xl:py-16 [.header+&]:pt-44 [.header+&]:md:pt-32',
+				'px-6 py-10 md:py-12 lg:py-16 [.header+&]:pt-44 [.header+&]:md:pt-32',
 				className
 			)}
 			{...restProps}
