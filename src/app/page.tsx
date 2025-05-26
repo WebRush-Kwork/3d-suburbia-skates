@@ -9,7 +9,7 @@ export default function Home() {
 				<Heading className='max-w-2xl relative' size='xl'>Escape the cul-de-sac</Heading>
 				<div className='flex flex-col justify-between items-center md:gap-2 lg:gap-3 xl:gap-4 lg:flex-row'>
 					<div className='max-w-[45ch] font-semibold lg:text-lg xl:text-xl'>
-						Not just a board, <span className='italic'>your</span> board. Design a board that's as real as the
+						Not just a board, <span className='italic'>your</span> board. Design a board that is as real as the
 						places you take it.
 					</div>
 					<ButtonLink icon='skateboard' size='lg' className='z-20 mt-2 block'>
