@@ -4,6 +4,8 @@ import { Heading } from '@/components/Heading'
 import { FaStar } from 'react-icons/fa6'
 import { productsGrid } from '@/data/products'
 import Image from 'next/image'
+import { HorizontalLine, VerticalLine } from '@/components/ProductGrid/Line'
+import { Scribble } from '@/components/ProductGrid/Scribble'
 
 const ProductGrid = () => {
 	return (
@@ -18,24 +20,33 @@ const ProductGrid = () => {
 			</div>
 			<div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4'>
 				{productsGrid.map((product, i) => (
-					<div key={i} className='w-full mx-auto px-8 pt-4 group relative'>
-						<div className='max-w-72 mx-auto'>
-							<div className='flex items-center justify-between text-lg md:text-xl lg:text-2xl'>
-								<span>${product.price}</span>
-								<span className='flex items-center gap-1'>
-									<FaStar className='text-yellow-400' />
-									37
-								</span>
-							</div>
+					<div
+						key={i}
+						className='w-full group relative max-w-72 mx-auto px-8 pt-4'
+					>
+						<VerticalLine className='absolute left-4 h-full top-0 stroke-2 text-stone-300 group-hover:text-stone-400 transition-colors duration-200' />
+						<VerticalLine className='absolute right-4 h-full top-0 stroke-2 text-stone-300 group-hover:text-stone-400 transition-colors duration-200' />
+						<HorizontalLine className='stroke-2 text-stone-300 group-hover:text-stone-400 -mx-8' />
+						<div className='flex items-center justify-between text-lg md:text-xl lg:text-2xl'>
+							<span>${product.price}</span>
+							<span className='flex items-center gap-1'>
+								<FaStar className='text-yellow-400' />
+								37
+							</span>
 						</div>
-						<div className='py-4 overflow-hidden'>
+						<div className='-mb-1 py-4 overflow-hidden'>
+							<Scribble className='absolute inset-0' color={product.colorHex} />
 							<Image
 								src={product.url}
 								alt={product.text}
 								width={150}
 								height={150}
-								className='mx-auto group-hover:scale-150 duration-500 ease-in-out'
+								className='mx-auto group-hover:scale-150 duration-500 ease-in-out w-[58%] origin-top'
 							/>
+						</div>
+						<HorizontalLine className='stroke-2 text-stone-300 group-hover:text-stone-400 -mx-8' />
+						<div className='font-sans text-center my-2 leading-tight text-lg md:text-xl'>
+							{product.text}
 						</div>
 						<div className='absolute inset-0 flex justify-center items-center opacity-0 group-hover:opacity-100 duration-200'>
 							<ButtonLink>Customize</ButtonLink>
