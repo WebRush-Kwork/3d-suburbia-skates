@@ -11,14 +11,14 @@ export function Heading({
 	as: Comp = 'h1',
 	className,
 	children,
-	size = 'lg',
+	size = 'lg'
 }: HeadingProps) {
 	return (
 		<Comp
 			className={clsx(
 				'font-sans uppercase',
 				size === 'xl' && 'text-4xl lg:text-6xl xl:text-7xl',
-				size === 'lg' && 'md:text-3xl lg:text-5xl xl:text-7xl',
+				size === 'lg' && 'text-3xl md:text-5xl lg:text-7xl',
 				size === 'md' && 'md:text-2xl lg:text-4xl xl:text-5xl',
 				size === 'sm' && 'md:text-xl lg:text-2xl xl:text-4xl',
 				size === 'xs' && 'md:text-base lg:text-lg xl:text-xl',
