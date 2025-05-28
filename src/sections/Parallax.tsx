@@ -1,9 +1,11 @@
 'use client'
+import { useEffect, useRef } from 'react'
+import clsx from 'clsx'
+import Image from 'next/image'
 import { Bounded } from '@/components/Bounded'
 import { ButtonLink } from '@/components/ButtonLink'
 import { Heading } from '@/components/Heading'
-import { useEffect, useRef } from 'react'
-import Image from 'next/image'
+import { parallaxData } from '@/data/parallax'
 
 const Parallax = () => {
 	const foregroundRef = useRef<HTMLDivElement>(null)
@@ -56,41 +58,67 @@ const Parallax = () => {
 	}, [])
 
 	return (
-		<Bounded className='bg-[var(--brand-blue)] bg-texture text-white'>
-			<div className='grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-24 items-center'>
-				<div className='flex flex-col items-center md:items-start md:text-start gap-8'>
-					<Heading size='lg' as='h2'>
-						Crafted for the kickflip
-					</Heading>
-					<div className='max-w-md leading-relaxed text-lg'>
-						Build for big tricks and hard landings, our boards are designed to
-						handle every flip, grind, and bail. Perfect balance, every time.
+		<>
+			{parallaxData.map((slide, index) => (
+				<Bounded
+					key={index}
+					className={clsx(
+						'bg-texture',
+						slide.background === 'blue' && 'bg-brand-blue text-white',
+						slide.background === 'orange' && 'bg-brand-orange text-white',
+						slide.background === 'navy' && 'bg-brand-navy text-white',
+						slide.background === 'lime' && 'bg-brand-lime text-[#27272a]'
+					)}
+				>
+					<div className='grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-24 items-center'>
+						<div
+							className={clsx(
+								'flex flex-col items-center md:items-start md:text-start gap-8',
+								slide.order === 2 && 'order-2'
+							)}
+						>
+							<Heading size='lg' as='h2'>
+								{slide.title}
+							</Heading>
+							<div className='max-w-md leading-relaxed text-lg'>
+								{slide.description}
+							</div>
+							<div>
+								<ButtonLink
+									color={slide.background === 'lime' ? 'orange' : 'lime'}
+								>
+									Shop Boards
+								</ButtonLink>
+							</div>
+						</div>
+						<div className='grid grid-cols-1 grid-rows-1 place-items-center'>
+							<div
+								className='col-start-1 row-start-1 transition-transform'
+								ref={backgroundRef}
+							>
+								<Image
+									src='/paint-background.png'
+									alt=''
+									width={400}
+									height={500}
+								/>
+							</div>
+							<div
+								className='col-start-1 row-start-1 transition-transform'
+								ref={foregroundRef}
+							>
+								<Image
+									src={`/guy-${index + 1}.png`}
+									alt=''
+									width={330}
+									height={500}
+								/>
+							</div>
+						</div>
 					</div>
-					<div>
-						<ButtonLink color='lime'>Shop Boards</ButtonLink>
-					</div>
-				</div>
-				<div className='grid grid-cols-1 grid-rows-1 place-items-center'>
-					<div
-						className='col-start-1 row-start-1 transition-transform'
-						ref={backgroundRef}
-					>
-						<Image
-							src='/paint-background.png'
-							alt=''
-							width={400}
-							height={500}
-						/>
-					</div>
-					<div
-						className='col-start-1 row-start-1 transition-transform'
-						ref={foregroundRef}
-					>
-						<Image src='/guy-1.png' alt='' width={330} height={500} />
-					</div>
-				</div>
-			</div>
-		</Bounded>
+				</Bounded>
+			))}
+		</>
 	)
 }
 

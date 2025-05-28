@@ -130,4 +130,28 @@
 	.animate-squiggle {
 		animation: squiggle 0.5s infinite;
 	}
+
+	.bg-brand-blue {
+		background-color: #4876ff;
+	}
+
+	.bg-brand-lime {
+		background-color: #d9f154;
+	}
+
+	.bg-brand-navy {
+		background-color: #2e3192;
+	}
+
+	.bg-brand-orange {
+		background-color: #ff7347;
+	}
+
+	.bg-brand-pink {
+		background-color: #f7d0e9;
+	}
+
+	.bg-brand-purple {
+		background-color: #692e54;
+	}
 }
