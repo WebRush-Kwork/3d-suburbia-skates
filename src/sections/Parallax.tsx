@@ -1,9 +1,62 @@
+'use client'
 import { Bounded } from '@/components/Bounded'
 import { ButtonLink } from '@/components/ButtonLink'
 import { Heading } from '@/components/Heading'
+import { useEffect, useRef } from 'react'
 import Image from 'next/image'
 
 const Parallax = () => {
+	const foregroundRef = useRef<HTMLDivElement>(null)
+	const backgroundRef = useRef<HTMLDivElement>(null)
+
+	const targetPosition = useRef({ x: 0, y: 0 })
+	const currentPosition = useRef({ x: 0, y: 0 })
+
+	useEffect(() => {
+		const onMouseMove = (event: MouseEvent) => {
+			const { innerWidth, innerHeight } = window
+
+			const xPercent = (event.clientX / innerWidth - 0.5) * 2
+			const yPercent = (event.clientY / innerHeight - 0.5) * 2
+
+			targetPosition.current = {
+				x: xPercent * -20,
+				y: yPercent * -20
+			}
+		}
+
+		window.addEventListener('mousemove', onMouseMove)
+
+		const animationFrame = () => {
+			const { x: targetX, y: targetY } = targetPosition.current
+			const { x: currentX, y: currentY } = currentPosition.current
+
+			const newX = currentX + (targetX - currentX) * 0.01
+			const newY = currentY + (targetY - currentY) * 0.01
+
+			currentPosition.current = { x: newX, y: newY }
+
+			if (backgroundRef.current)
+				backgroundRef.current.style.transform = `translate(${newX}px, ${newY}px)`
+
+			if (foregroundRef.current)
+				foregroundRef.current.style.transform = `translate(${newX * 2.5}px, ${
+					newY * 2.5
+				}px)`
+
+			console.log(newX, newY)
+
+			requestAnimationFrame(animationFrame)
+		}
+
+		const frame = requestAnimationFrame(animationFrame)
+
+		return () => {
+			window.removeEventListener('mousemove', onMouseMove)
+			cancelAnimationFrame(frame)
+		}
+	}, [])
+
 	return (
 		<Bounded className='bg-[var(--brand-blue)] bg-texture text-white'>
 			<div className='grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-24 items-center'>
@@ -20,7 +73,10 @@ const Parallax = () => {
 					</div>
 				</div>
 				<div className='grid grid-cols-1 grid-rows-1 place-items-center'>
-					<div className='col-start-1 row-start-1 transition-transform'>
+					<div
+						className='col-start-1 row-start-1 transition-transform'
+						ref={backgroundRef}
+					>
 						<Image
 							src='/paint-background.png'
 							alt=''
@@ -28,7 +84,10 @@ const Parallax = () => {
 							height={500}
 						/>
 					</div>
-					<div className='col-start-1 row-start-1 transition-transform'>
+					<div
+						className='col-start-1 row-start-1 transition-transform'
+						ref={foregroundRef}
+					>
 						<Image src='/guy-1.png' alt='' width={330} height={500} />
 					</div>
 				</div>
