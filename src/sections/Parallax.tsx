@@ -8,8 +8,8 @@ import { Heading } from '@/components/Heading'
 import { parallaxData } from '@/data/parallax'
 
 const Parallax = () => {
-	const foregroundRef = useRef<HTMLDivElement>(null)
-	const backgroundRef = useRef<HTMLDivElement>(null)
+	const foregroundRef = useRef<HTMLDivElement[]>([])
+	const backgroundRef = useRef<HTMLDivElement[]>([])
 
 	const targetPosition = useRef({ x: 0, y: 0 })
 	const currentPosition = useRef({ x: 0, y: 0 })
@@ -39,12 +39,17 @@ const Parallax = () => {
 			currentPosition.current = { x: newX, y: newY }
 
 			if (backgroundRef.current)
-				backgroundRef.current.style.transform = `translate(${newX}px, ${newY}px)`
+				backgroundRef.current.forEach(
+					ref => (ref.style.transform = `translate(${newX}px, ${newY}px)`)
+				)
 
 			if (foregroundRef.current)
-				foregroundRef.current.style.transform = `translate(${newX * 2.5}px, ${
-					newY * 2.5
-				}px)`
+				foregroundRef.current.forEach(
+					ref =>
+						(ref.style.transform = `translate(${newX * 2.5}px, ${
+							newY * 2.5
+						}px)`)
+				)
 
 			requestAnimationFrame(animationFrame)
 		}
@@ -94,7 +99,7 @@ const Parallax = () => {
 						<div className='grid grid-cols-1 grid-rows-1 place-items-center'>
 							<div
 								className='col-start-1 row-start-1 transition-transform'
-								ref={backgroundRef}
+								ref={el => (backgroundRef.current[index] = el)}
 							>
 								<Image
 									src='/paint-background.png'
@@ -105,7 +110,7 @@ const Parallax = () => {
 							</div>
 							<div
 								className='col-start-1 row-start-1 transition-transform'
-								ref={foregroundRef}
+								ref={el => (foregroundRef.current[index] = el)}
 							>
 								<Image
 									src={`/guy-${index + 1}.png`}
