@@ -1,11 +1,17 @@
 'use client'
 import { useEffect, useRef } from 'react'
-import clsx from 'clsx'
-import Image from 'next/image'
 import { Bounded } from '@/components/Bounded'
 import { ButtonLink } from '@/components/ButtonLink'
 import { Heading } from '@/components/Heading'
 import { parallaxData } from '@/data/parallax'
+import clsx from 'clsx'
+import Image from 'next/image'
+
+declare module 'react' {
+	interface CSSProperties {
+		'--index'?: number
+	}
+}
 
 const Parallax = () => {
 	const foregroundRef = useRef<HTMLDivElement[]>([])
@@ -63,17 +69,18 @@ const Parallax = () => {
 	}, [])
 
 	return (
-		<>
+		<div>
 			{parallaxData.map((slide, index) => (
 				<Bounded
 					key={index}
 					className={clsx(
-						'bg-texture',
+						'bg-texture sticky top-[calc(var(--index)*2rem)]',
 						slide.background === 'blue' && 'bg-brand-blue text-white',
 						slide.background === 'orange' && 'bg-brand-orange text-white',
 						slide.background === 'navy' && 'bg-brand-navy text-white',
 						slide.background === 'lime' && 'bg-brand-lime text-[#27272a]'
 					)}
+					style={{ '--index': index }}
 				>
 					<div className='grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-24 items-center'>
 						<div
@@ -99,7 +106,9 @@ const Parallax = () => {
 						<div className='grid grid-cols-1 grid-rows-1 place-items-center'>
 							<div
 								className='col-start-1 row-start-1 transition-transform'
-								ref={el => (backgroundRef.current[index] = el)}
+								ref={el => {
+									if (el) backgroundRef.current[index] = el
+								}}
 							>
 								<Image
 									src='/paint-background.png'
@@ -110,7 +119,9 @@ const Parallax = () => {
 							</div>
 							<div
 								className='col-start-1 row-start-1 transition-transform'
-								ref={el => (foregroundRef.current[index] = el)}
+								ref={el => {
+									if (el) foregroundRef.current[index] = el
+								}}
 							>
 								<Image
 									src={`/guy-${index + 1}.png`}
@@ -123,7 +134,7 @@ const Parallax = () => {
 					</div>
 				</Bounded>
 			))}
-		</>
+		</div>
 	)
 }
 
