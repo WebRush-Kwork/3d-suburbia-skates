@@ -1,12 +1,11 @@
 'use client'
-
 import { useEffect, useRef, useState } from 'react'
 
 type TLazyYouTubePlayer = {
 	youtubeId: string
 }
 
-export function LazyYouTubePlayer({ youtubeId }: TLazyYouTubePlayer) {
+const LazyYouTubePlayer = ({ youtubeId }: TLazyYouTubePlayer) => {
 	const containerRef = useRef<HTMLDivElement>(null)
 	const [isInView, setIsInView] = useState<boolean>(false)
 
@@ -39,3 +38,5 @@ export function LazyYouTubePlayer({ youtubeId }: TLazyYouTubePlayer) {
 		</div>
 	)
 }
+
+export default LazyYouTubePlayer
