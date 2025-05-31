@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import { ButtonLink } from './ButtonLink'
 import { Logo } from './Logo'
+import Nav from './Nav'
 
 const Header = () => {
 	return (
@@ -9,28 +10,7 @@ const Header = () => {
 				<Link href='/'>
 					<Logo className='text-[var(--brand-purple)] h-12 md:h-14 lg:h-16 xl:h-20' />
 				</Link>
-				<nav
-					aria-label='Main'
-					className='col-span-full row-start-2 md:col-span-1 md:col-start-2 md:row-start-1'
-				>
-					<ul className='flex flex-wrap justify-center items-center gap-8'>
-						<li>
-							<Link href='/' className='text-lg md:text-xl'>
-								Team
-							</Link>
-						</li>
-						<li>
-							<Link href='/build' className='text-lg md:text-xl'>
-								Customizer
-							</Link>
-						</li>
-						<li>
-							<Link href='/' className='text-lg md:text-xl'>
-								About
-							</Link>
-						</li>
-					</ul>
-				</nav>
+				<Nav />
 				<div className='justify-self-end'>
 					<ButtonLink icon='cart' color='purple' aria-label='Cart (1)'>
 						<span className='md:hidden'>1</span>
