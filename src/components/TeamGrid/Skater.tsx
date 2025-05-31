@@ -1,26 +1,51 @@
-import { TTeamGrid } from '@/data/team'
 import Image from 'next/image'
+import clsx from 'clsx'
+import { TTeamGrid } from '@/data/team'
+import { SkaterScribble } from './SkaterScribble'
 
-const Skater = ({ background, foreground, name }: TTeamGrid) => {
+const Skater = ({
+	background,
+	foreground,
+	firstName,
+	lastName,
+	color
+}: TTeamGrid) => {
 	return (
-		<div className='relative group overflow-hidden'>
+		<div className='relative group overflow-hidden max-w-[445px] max-h-[600px]'>
 			<div className='grid place-items-center grid-cols-1 grid-rows-1'>
 				<div className='col-start-1 row-start-1'>
-					<Image src={background} alt='' width={500} height={500} />
+					<Image
+						src={background}
+						alt=''
+						width={500}
+						height={500}
+						className='duration-1000 ease-in-out 0.2s group-hover:brightness-75 group-hover:saturate-50'
+					/>
 				</div>
-				<div className='col-start-1 row-start-1'>
+				<div className='col-start-1 row-start-1 z-20'>
 					<Image
 						src={foreground}
 						alt=''
 						width={500}
 						height={500}
-						className='group-hover:scale-125 duration-500 ease-in-out'
+						className='group-hover:scale-110 duration-1000 ease-in-out 0.2s'
 					/>
 				</div>
+				<SkaterScribble
+					className={clsx(
+						'z-10 col-start-1 row-start-1 group-hover:[&>path]:[stroke-dashoffset:0]',
+						color === 'blue' && 'text-[#4876ff]',
+						color === 'lime' && 'text-[#d9f154]',
+						color === 'orange' && 'text-[#ff7347]',
+						color === 'pink' && 'text-[#f7d0e9]'
+					)}
+				/>
 			</div>
-			<span className='text-2xl lg:text-3xl text-white font-sans absolute bottom-2 left-2'>
-				{name}
-			</span>
+			<div className='absolute inset-0 h-96 w-full place-self-end bg-gradient-to-t from-black via-transparent to-transparent' />
+			<div className='text-2xl lg:text-3xl text-white font-sans absolute bottom-2 left-2 z-20'>
+				<span>{firstName}</span>
+				<span className='block'>{lastName}</span>
+			</div>
 		</div>
 	)
 }

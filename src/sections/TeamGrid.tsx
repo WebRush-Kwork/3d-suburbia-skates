@@ -3,7 +3,6 @@ import { Heading } from '@/components/Heading'
 import { teamGrid } from '@/data/team'
 import { Fragment } from 'react'
 import Skater from '@/components/TeamGrid/Skater'
-import { SkaterScribble } from '@/components/TeamGrid/SkaterScribble'
 
 const TeamGrid = () => {
 	return (
@@ -11,18 +10,13 @@ const TeamGrid = () => {
 			<Heading as='h2' className='mb-8 text-center text-white'>
 				The Team
 			</Heading>
-			<div className='grid grid-cols-1 gap-8 md:grid-cols-4'>
+			<div className='grid grid-cols-1 gap-8 md:grid-cols-4 place-items-center'>
 				{teamGrid.map((member, i) => (
 					<Fragment key={i}>
-						<Skater
-							name={member.name}
-							background={member.background}
-							foreground={member.foreground}
-						/>
+						<Skater {...member} />
 					</Fragment>
 				))}
 			</div>
-			<SkaterScribble />
 		</Bounded>
 	)
 }

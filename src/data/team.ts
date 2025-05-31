@@ -1,28 +1,38 @@
 export type TTeamGrid = {
-	name: string
+	firstName: string
+	lastName: string
 	foreground: string
 	background: string
+	color: 'lime' | 'blue' | 'orange' | 'pink'
 }
 
 export const teamGrid: TTeamGrid[] = [
 	{
-		name: 'Sophie Castillo',
+		firstName: 'Sophie',
+		lastName: 'Castillo',
 		background: '/sophie-back.png',
-		foreground: '/sophie-front.png'
+		foreground: '/sophie-front.png',
+		color: 'blue'
 	},
 	{
-		name: 'Dylan Foster',
+		firstName: 'Dylan',
+		lastName: 'Foster',
 		background: '/dylan-back.png',
-		foreground: '/dylan-front.png'
+		foreground: '/dylan-front.png',
+		color: 'lime'
 	},
 	{
-		name: 'Carter Bell',
+		firstName: 'Carter',
+		lastName: 'Bell',
 		background: '/carter-back.png',
-		foreground: '/carter-front.png'
+		foreground: '/carter-front.png',
+		color: 'orange'
 	},
 	{
-		name: 'Jordan Lee',
+		firstName: 'Jordan',
+		lastName: 'Lee',
 		background: '/jordan-back.png',
-		foreground: '/jordan-front.png'
-	},
+		foreground: '/jordan-front.png',
+		color: 'pink'
+	}
 ]

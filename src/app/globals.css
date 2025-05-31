@@ -164,6 +164,6 @@
 	}
 
 	.skater-scribble-path {
-		stroke-dashoffset: -2300;
+		transition: stroke-dashoffset 1s ease-in-out 0.2s;
 	}
 }
