@@ -154,4 +154,12 @@
 	.bg-brand-purple {
 		background-color: #692e54;
 	}
+
+	.video-mask {
+		mask-image: url('/video-mask.png');
+		mask-size: 100% auto;
+		mask-repeat: no-repeat;
+		mask-mode: alpha;
+		mask-position: center center;
+	}
 }
