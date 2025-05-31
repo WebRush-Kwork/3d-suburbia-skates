@@ -75,7 +75,7 @@
 		}
 	}
 
-	.stack-layout {
+	/* .stack-layout {
 		display: grid;
 		grid-template-areas: 'stack';
 		place-items: center;
@@ -95,7 +95,7 @@
 
 	.skater:hover .skater-scribble-path {
 		stroke-dashoffset: 0;
-	}
+	} */
 
 	.slide-in-hidden {
 		opacity: 0;
@@ -161,5 +161,9 @@
 		mask-repeat: no-repeat;
 		mask-mode: alpha;
 		mask-position: center center;
+	}
+
+	.skater-scribble-path {
+		stroke-dashoffset: -2300;
 	}
 }

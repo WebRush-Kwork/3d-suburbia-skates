@@ -3,6 +3,7 @@ import { Heading } from '@/components/Heading'
 import { teamGrid } from '@/data/team'
 import { Fragment } from 'react'
 import Skater from '@/components/TeamGrid/Skater'
+import { SkaterScribble } from '@/components/TeamGrid/SkaterScribble'
 
 const TeamGrid = () => {
 	return (
@@ -21,6 +22,7 @@ const TeamGrid = () => {
 					</Fragment>
 				))}
 			</div>
+			<SkaterScribble />
 		</Bounded>
 	)
 }
