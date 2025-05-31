@@ -1,5 +1,5 @@
 import { Bounded } from '@/components/Bounded'
-import LazyYouTubePlayer from '@/components/Video/LazyYoutubePlayer'
+import { LazyYouTubePlayer } from '@/components/Video/LazyYoutubePlayer'
 import Image from 'next/image'
 
 const Video = () => {
