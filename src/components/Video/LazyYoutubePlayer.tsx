@@ -5,7 +5,7 @@ type TLazyYouTubePlayer = {
 	youtubeId: string
 }
 
-export function LazyYouTubePlayer ({ youtubeId }: TLazyYouTubePlayer) {
+export function LazyYouTubePlayer({ youtubeId }: TLazyYouTubePlayer) {
 	const containerRef = useRef<HTMLDivElement>(null)
 	const [isInView, setIsInView] = useState<boolean>(false)
 

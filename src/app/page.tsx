@@ -1,6 +1,7 @@
 import Hero from '@/sections/Hero'
 import Parallax from '@/sections/Parallax'
 import ProductGrid from '@/sections/ProductGrid'
+import TeamGrid from '@/sections/TeamGrid'
 import Video from '@/sections/Video'
 
 export default function Home() {
@@ -10,6 +11,7 @@ export default function Home() {
 			<ProductGrid />
 			<Parallax />
 			<Video />
+			<TeamGrid />
 		</>
 	)
 }
