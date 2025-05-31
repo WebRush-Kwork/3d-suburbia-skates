@@ -1,7 +1,7 @@
 import Link from 'next/link'
+import Nav from './Nav'
 import { ButtonLink } from './ButtonLink'
 import { Logo } from './Logo'
-import Nav from './Nav'
 
 const Header = () => {
 	return (
