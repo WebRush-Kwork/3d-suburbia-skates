@@ -1,9 +1,8 @@
 import { Bounded } from '@/components/Bounded'
 import { Heading } from '@/components/Heading'
-import Skater from '@/components/TeamGrid/Skater'
 import { teamGrid } from '@/data/team'
-import Image from 'next/image'
 import { Fragment } from 'react'
+import Skater from '@/components/TeamGrid/Skater'
 
 const TeamGrid = () => {
 	return (
