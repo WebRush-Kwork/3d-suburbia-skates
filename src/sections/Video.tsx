@@ -1,6 +1,5 @@
 import { Bounded } from '@/components/Bounded'
 import { LazyYouTubePlayer } from '@/components/Video/LazyYoutubePlayer'
-import clsx from 'clsx'
 import Image from 'next/image'
 
 const Video = () => {
