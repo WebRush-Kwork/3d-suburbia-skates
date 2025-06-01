@@ -1,6 +1,6 @@
 'use client'
 import { Group } from 'three'
-import { ContactShadows, Environment, OrbitControls } from '@react-three/drei'
+import { ContactShadows, Environment } from '@react-three/drei'
 import { Canvas, ThreeEvent } from '@react-three/fiber'
 import { Suspense, useRef } from 'react'
 import { SkateboardModel } from './SkateboardModel'
@@ -59,7 +59,6 @@ const Scene = () => {
 
 	return (
 		<group>
-			<OrbitControls />
 			<Environment files='/hdr/warehouse-256.hdr' />
 			<group ref={groupRef}>
 				<SkateboardModel
