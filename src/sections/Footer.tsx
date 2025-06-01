@@ -1,4 +1,3 @@
-import { Bounded } from '@/components/Bounded'
 import { FooterPhysics } from '@/components/Footer/FooterPhysics'
 import { Logo } from '@/components/Logo'
 import { physicsFooter } from '@/data/physics'
