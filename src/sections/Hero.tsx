@@ -3,6 +3,7 @@ import { ButtonLink } from '@/components/ButtonLink'
 import { Heading } from '@/components/Heading'
 import { TallLogo } from '@/components/Hero/TallLogo'
 import { WideLogo } from '@/components/Hero/WideLogo'
+import InteractiveSkateboard from '@/components/Hero/InteractiveSkateboard'
 
 const Hero = () => {
 	return (
@@ -25,6 +26,7 @@ const Hero = () => {
 					</ButtonLink>
 				</div>
 			</div>
+			<InteractiveSkateboard />
 		</Bounded>
 	)
 }
