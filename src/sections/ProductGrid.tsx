@@ -6,17 +6,22 @@ import { productsGrid } from '@/data/products'
 import Image from 'next/image'
 import { HorizontalLine, VerticalLine } from '@/components/ProductGrid/Line'
 import { Scribble } from '@/components/ProductGrid/Scribble'
+import SlideIn from '@/components/SlideIn'
 
 const ProductGrid = () => {
 	return (
 		<Bounded className='bg-[var(--brand-gray)] bg-texture'>
 			<div className='text-center'>
-				<Heading className='mb-4 md:mb-5 lg:mb-6' as='h2'>
-					Latest Drop
-				</Heading>
-				<div className='mb-6 md:mb-8 lg:mb-9 xl:mb-10'>
-					Grab our freshest designs before they sell out!
-				</div>
+				<SlideIn>
+					<Heading className='mb-4 md:mb-5 lg:mb-6' as='h2'>
+						Latest Drop
+					</Heading>
+				</SlideIn>
+				<SlideIn>
+					<div className='mb-6 md:mb-8 lg:mb-9 xl:mb-10'>
+						Grab our freshest designs before they sell out!
+					</div>
+				</SlideIn>
 			</div>
 			<div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4'>
 				{productsGrid.map((product, i) => (

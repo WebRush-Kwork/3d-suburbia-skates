@@ -6,6 +6,7 @@ import { Heading } from '@/components/Heading'
 import { parallaxData } from '@/data/parallax'
 import clsx from 'clsx'
 import Image from 'next/image'
+import SlideIn from '@/components/SlideIn'
 
 declare module 'react' {
 	interface CSSProperties {
@@ -89,19 +90,23 @@ const Parallax = () => {
 								slide.order === 2 && 'order-2'
 							)}
 						>
-							<Heading size='lg' as='h2'>
-								{slide.title}
-							</Heading>
-							<div className='max-w-md leading-relaxed text-lg'>
-								{slide.description}
-							</div>
-							<div>
+							<SlideIn>
+								<Heading size='lg' as='h2'>
+									{slide.title}
+								</Heading>
+							</SlideIn>
+							<SlideIn>
+								<div className='max-w-md leading-relaxed text-lg'>
+									{slide.description}
+								</div>
+							</SlideIn>
+							<SlideIn>
 								<ButtonLink
 									color={slide.background === 'lime' ? 'orange' : 'lime'}
 								>
 									Shop Boards
 								</ButtonLink>
-							</div>
+							</SlideIn>
 						</div>
 						<div className='grid grid-cols-1 grid-rows-1 place-items-center'>
 							<div
