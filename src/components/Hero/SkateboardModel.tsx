@@ -7,8 +7,6 @@ import React from 'react'
 import { useGLTF, useTexture } from '@react-three/drei'
 import { GLTF } from 'three-stdlib'
 
-interface ISkateboard {}
-
 type GLTFResult = GLTF & {
 	nodes: {
 		GripTape: THREE.Mesh
@@ -22,17 +20,16 @@ type GLTFResult = GLTF & {
 		Truck1: THREE.Mesh
 		Truck2: THREE.Mesh
 	}
-	materials: {}
 }
 
-export function SkateboardModel(props: ISkateboard) {
+export function SkateboardModel() {
 	const { nodes } = useGLTF('/skateboard.gltf') as unknown as GLTFResult
 
-	const gripTapeDiffuse = useTexture('/skateboard/griptape-diffuse.webp')
-	const gripTapeRoughness = useTexture('/skateboard/griptape-roughness.webp')
+	// const gripTapeDiffuse = useTexture('/skateboard/griptape-diffuse.webp')
+	// const gripTapeRoughness = useTexture('/skateboard/griptape-roughness.webp')
 
 	return (
-		<group {...props} dispose={null}>
+		<group dispose={null}>
 			<group name='Scene'>
 				<mesh
 					name='GripTape'
