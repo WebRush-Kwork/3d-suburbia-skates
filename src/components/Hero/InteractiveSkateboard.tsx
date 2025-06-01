@@ -21,12 +21,15 @@ const InteractiveSkateboard = () => {
 
 export default InteractiveSkateboard
 
-function Scene() {
+const Scene = () => {
 	return (
 		<group>
 			<OrbitControls />
-			<Environment files={'/hdr/warehouse-256.hdr'} />
-			<SkateboardModel />
+			<Environment files='/hdr/warehouse-256.hdr' />
+			<SkateboardModel
+				wheelTextureUrl='/wheel-yellow.png'
+				deckTextureUrl='/yellow-and-black.png'
+			/>
 			<ContactShadows opacity={0.6} position={[0, -0.08, 0]} />
 		</group>
 	)

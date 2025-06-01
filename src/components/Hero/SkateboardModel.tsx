@@ -1,7 +1,9 @@
 import * as THREE from 'three'
-import { useMemo } from 'react'
+import { useEffect, useMemo, useRef } from 'react'
 import { useGLTF, useTexture } from '@react-three/drei'
 import { GLTF } from 'three-stdlib'
+import { useFrame } from '@react-three/fiber'
+import gsap from 'gsap'
 
 type GLTFResult = GLTF & {
 	nodes: {
@@ -18,7 +20,18 @@ type GLTFResult = GLTF & {
 	}
 }
 
-export function SkateboardModel() {
+interface ISkateboardModel {
+	wheelTextureUrl: string
+	deckTextureUrl: string
+	isConstantRotation?: boolean
+}
+
+export function SkateboardModel({
+	wheelTextureUrl,
+	deckTextureUrl,
+	isConstantRotation = false
+}: ISkateboardModel) {
+	const wheelRefs = useRef<THREE.Object3D[]>([])
 	const { nodes } = useGLTF('/skateboard.gltf') as unknown as GLTFResult
 
 	const gripTapeDiffuse = useTexture('/skateboard/griptape-diffuse.webp')
@@ -82,8 +95,9 @@ export function SkateboardModel() {
 		[truckColor, metalNormal]
 	)
 
-	const deckTexture = useTexture('/skateboard/Deck.webp')
+	const deckTexture = useTexture(deckTextureUrl)
 	deckTexture.flipY = false
+	deckTexture.colorSpace = THREE.SRGBColorSpace
 
 	const deckMaterial = useMemo(
 		() =>
@@ -94,8 +108,9 @@ export function SkateboardModel() {
 		[deckTexture]
 	)
 
-	const wheelTexture = useTexture('/skateboard/SkateWheel1.png')
+	const wheelTexture = useTexture(wheelTextureUrl)
 	wheelTexture.flipY = false
+	wheelTexture.colorSpace = THREE.SRGBColorSpace
 
 	const wheelMaterial = useMemo(
 		() =>
@@ -105,6 +120,31 @@ export function SkateboardModel() {
 			}),
 		[wheelTexture]
 	)
+
+	const addToWheelRefs = (ref: THREE.Object3D) =>
+		ref && !wheelRefs.current.includes(ref) && wheelRefs.current.push(ref)
+
+	useFrame(() => {
+		const currentWheelRef = wheelRefs.current
+		if (!currentWheelRef || isConstantRotation) return
+
+		for (const wheel of currentWheelRef) {
+			wheel.rotation.x += 0.2
+		}
+	})
+
+	useEffect(() => {
+		const currentWheelRef = wheelRefs.current
+		if (!currentWheelRef || !isConstantRotation) return
+
+		for (const wheel of currentWheelRef) {
+			gsap.to(wheel.rotation, {
+				x: '+=30',
+				duration: 2.5,
+				ease: 'circ.out'
+			})
+		}
+	}, [])
 
 	return (
 		<group dispose={null}>
@@ -124,6 +164,7 @@ export function SkateboardModel() {
 					geometry={nodes.Wheel1.geometry}
 					material={wheelMaterial}
 					position={[0.238, 0.086, 0.635]}
+					ref={addToWheelRefs}
 				/>
 				<mesh
 					name='Wheel2'
@@ -132,6 +173,7 @@ export function SkateboardModel() {
 					geometry={nodes.Wheel2.geometry}
 					material={wheelMaterial}
 					position={[-0.237, 0.086, 0.635]}
+					ref={addToWheelRefs}
 				/>
 				<mesh
 					name='Deck'
@@ -149,6 +191,7 @@ export function SkateboardModel() {
 					material={wheelMaterial}
 					position={[-0.238, 0.086, -0.635]}
 					rotation={[Math.PI, 0, Math.PI]}
+					ref={addToWheelRefs}
 				/>
 				<mesh
 					name='Bolts'
@@ -167,6 +210,7 @@ export function SkateboardModel() {
 					material={wheelMaterial}
 					position={[0.237, 0.086, -0.635]}
 					rotation={[Math.PI, 0, Math.PI]}
+					ref={addToWheelRefs}
 				/>
 				<mesh
 					name='Baseplates'
