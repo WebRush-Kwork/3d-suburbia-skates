@@ -144,7 +144,7 @@ export function SkateboardModel({
 				ease: 'circ.out'
 			})
 		}
-	}, [])
+	}, [isConstantRotation])
 
 	return (
 		<group dispose={null}>

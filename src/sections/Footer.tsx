@@ -21,9 +21,9 @@ const Footer = () => {
 				/>
 				<Logo className='h-20 pointer-events-none mix-blend-exclusion md:h-28' />
 			</div>
-			<Bounded as='div'>
+			<div className='px-6 py-10 md:py-12 lg:py-16'>
 				<Nav />
-			</Bounded>
+			</div>
 		</footer>
 	)
 }
