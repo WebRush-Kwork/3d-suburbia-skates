@@ -32,8 +32,6 @@ const Scene = () => {
 		const board = groupRef.current
 		if (!board) return
 
-		const { name } = event.object
-
 		gsap
 			.timeline()
 			.to(board.position, {
