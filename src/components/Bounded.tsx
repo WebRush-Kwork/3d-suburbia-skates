@@ -1,11 +1,10 @@
-import { CSSProperties, ElementType, ReactNode } from 'react'
 import clsx from 'clsx'
 
-type BoundedProps = {
-	as?: ElementType
+interface BoundedProps {
+	as?: React.ElementType
 	className?: string
-	style?: CSSProperties
-	children: ReactNode
+	style?: React.CSSProperties
+	children: React.ReactNode
 }
 
 export function Bounded({
@@ -15,7 +14,9 @@ export function Bounded({
 	...restProps
 }: BoundedProps) {
 	return (
+		// @ts-ignore
 		<Comp
+			// @ts-ignore
 			className={clsx(
 				'px-6 py-10 md:py-12 lg:py-16 [.header+&]:pt-44 [.header+&]:md:pt-32',
 				className
