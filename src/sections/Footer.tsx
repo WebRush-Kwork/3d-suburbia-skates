@@ -1,6 +1,7 @@
 import { Bounded } from '@/components/Bounded'
 import { FooterPhysics } from '@/components/Footer/FooterPhysics'
 import { Logo } from '@/components/Logo'
+import { physicsFooter } from '@/data/physics'
 import Nav from '@/components/Nav'
 import Image from 'next/image'
 
@@ -13,6 +14,10 @@ const Footer = () => {
 					alt=''
 					fill
 					className='object-cover'
+				/>
+				<FooterPhysics
+					boardTextureURLs={physicsFooter}
+					className='absolute inset-0 overflow-hidden'
 				/>
 				<Logo className='h-20 pointer-events-none mix-blend-exclusion md:h-28' />
 			</div>
