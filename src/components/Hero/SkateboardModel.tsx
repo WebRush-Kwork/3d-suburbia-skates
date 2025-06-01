@@ -139,12 +139,12 @@ export function SkateboardModel({
 
 		for (const wheel of currentWheelRef) {
 			gsap.to(wheel.rotation, {
-				x: '+=30',
+				x: '-=30',
 				duration: 2.5,
 				ease: 'circ.out'
 			})
 		}
-	}, [isConstantRotation])
+	}, [isConstantRotation, wheelTextureUrl])
 
 	return (
 		<group dispose={null}>
