@@ -3,7 +3,6 @@
 import { useRef } from 'react'
 import gsap from 'gsap'
 import { useGSAP } from '@gsap/react'
-import clsx from 'clsx'
 
 gsap.registerPlugin(useGSAP)
 
@@ -36,7 +35,7 @@ export function WavyPaths() {
 			viewBox='0 0 1242 308'
 			width={1242}
 			height={308}
-			className={clsx('pointer-events-none text-zinc-600', 'animate-squiggle')}
+			className={'pointer-events-none text-zinc-600 animate-squiggle'}
 		>
 			<path
 				stroke='currentColor'
