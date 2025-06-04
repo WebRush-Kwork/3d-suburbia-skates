@@ -126,6 +126,26 @@ const SkateboardScene = () => {
 	const { camera } = useThree()
 
 	useEffect(() => {
+		if (!groupRef.current || !originRef.current) return
+
+		gsap.to(groupRef.current.position, {
+			x: 0.2,
+			duration: 3,
+			repeat: -1,
+			yoyo: true,
+			ease: 'sine.inOut'
+		})
+
+		gsap.to(originRef.current.rotation, {
+			y: Math.PI / 64,
+			duration: 3,
+			repeat: -1,
+			yoyo: true,
+			ease: 'sine.inOut'
+		})
+	}, [])
+
+	useEffect(() => {
 		camera.lookAt(new Vector3(-0.2, 0.15, 0))
 
 		const setZoom = () => {
@@ -189,7 +209,12 @@ const SkateboardScene = () => {
 				position={[0, -0.09, -0.5]}
 				scale={[0.2, 0.2, 0.2]}
 			>
-				<Html transform zIndexRange={[10, 0]} occlude='blending'>
+				<Html
+					wrapperClass='pointer-events-none'
+					transform
+					zIndexRange={[10, 0]}
+					occlude='blending'
+				>
 					<WavyPaths />
 				</Html>
 			</group>
