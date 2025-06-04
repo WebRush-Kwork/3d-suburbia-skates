@@ -19,9 +19,6 @@ interface IPreview {
 
 const Preview = ({ wheelTextureUrls, deckTextureUrls }: IPreview) => {
 	const cameraControlsRef = useRef<CameraControls>(null)
-	// @ts-ignore
-	const { selectedWheel, selectedBolt, selectedDeck, selectedTruck } =
-		useCustomizerControls()
 
 	// const wheelTextureUrl = wheelTextureUrls[0]
 	// const deckTextureUrl = deckTextureUrls[0]
