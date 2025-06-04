@@ -24,12 +24,14 @@ interface ISkateboardModel {
 	wheelTextureUrl: string
 	deckTextureUrl: string
 	isConstantRotation?: boolean
+	pose?: 'upright' | 'side'
 }
 
 export function SkateboardModel({
 	wheelTextureUrl,
 	deckTextureUrl,
-	isConstantRotation = false
+	isConstantRotation = false,
+	pose = 'upright'
 }: ISkateboardModel) {
 	const wheelRefs = useRef<THREE.Object3D[]>([])
 	const { nodes } = useGLTF('/skateboard.gltf') as unknown as GLTFResult
@@ -126,7 +128,7 @@ export function SkateboardModel({
 
 	useFrame(() => {
 		const currentWheelRef = wheelRefs.current
-		if (!currentWheelRef || isConstantRotation) return
+		if (!currentWheelRef || !isConstantRotation) return
 
 		for (const wheel of currentWheelRef) {
 			wheel.rotation.x += 0.2
@@ -135,7 +137,7 @@ export function SkateboardModel({
 
 	useEffect(() => {
 		const currentWheelRef = wheelRefs.current
-		if (!currentWheelRef || !isConstantRotation) return
+		if (!currentWheelRef || isConstantRotation) return
 
 		for (const wheel of currentWheelRef) {
 			gsap.to(wheel.rotation, {
@@ -146,8 +148,27 @@ export function SkateboardModel({
 		}
 	}, [isConstantRotation, wheelTextureUrl])
 
+	const positions = useMemo(
+		() =>
+			({
+				upright: {
+					rotation: [0, 0, 0],
+					position: [0, 0, 0]
+				},
+				side: {
+					rotation: [0, 0, Math.PI / 2],
+					position: [0, 0.295, 0]
+				}
+			} as const),
+		[]
+	)
+
 	return (
-		<group dispose={null}>
+		<group
+			dispose={null}
+			rotation={positions[pose].rotation}
+			position={positions[pose].position}
+		>
 			<group name='Scene'>
 				<mesh
 					name='GripTape'

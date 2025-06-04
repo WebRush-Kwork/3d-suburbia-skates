@@ -4,9 +4,9 @@ import { useEffect, useRef, useState } from 'react'
 import { Group, Vector3 } from 'three'
 import { SkateboardModel } from './SkateboardModel'
 import { INITIAL_CAMERA_POSITION } from './InteractiveSkateboard'
+import { WavyPaths } from './WavyPaths'
 import gsap from 'gsap'
 import Hotspot from './Hotspot'
-import { WavyPaths } from './WavyPaths'
 
 type TIsHotspotShown = {
 	front: boolean
@@ -172,6 +172,7 @@ const SkateboardScene = () => {
 						<SkateboardModel
 							wheelTextureUrl='/wheel-yellow.png'
 							deckTextureUrl='/yellow-and-black.png'
+							isConstantRotation={true}
 						/>
 						<Hotspot
 							isVisible={!isAnimating && isHotspotShown.front}

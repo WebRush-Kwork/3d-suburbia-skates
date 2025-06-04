@@ -21,7 +21,12 @@ const Hero = () => {
 						Not just a board, <span className='italic'>your</span> board. Design
 						a board that is as real as the places you take it.
 					</div>
-					<ButtonLink icon='skateboard' size='lg' className='z-20 mt-2 block'>
+					<ButtonLink
+						href='/build'
+						icon='skateboard'
+						size='lg'
+						className='z-20 mt-2 block'
+					>
 						Build Your Board
 					</ButtonLink>
 				</div>

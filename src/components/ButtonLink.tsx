@@ -7,6 +7,7 @@ export type ButtonProps = {
 	size?: 'sm' | 'md' | 'lg'
 	icon?: 'cart' | 'skateboard' | 'plus'
 	className?: string
+	href?: string
 	children: React.ReactNode
 }
 
@@ -16,6 +17,7 @@ export function ButtonLink({
 	icon,
 	children,
 	className,
+	href = '/',
 	...props
 }: ButtonProps) {
 	return (
@@ -33,7 +35,7 @@ export function ButtonLink({
 				className
 			)}
 			{...props}
-			href='/'
+			href={href}
 		>
 			{icon && (
 				<>
