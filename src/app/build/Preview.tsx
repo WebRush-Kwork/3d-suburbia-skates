@@ -7,9 +7,9 @@ import {
 	useTexture
 } from '@react-three/drei'
 import { Canvas } from '@react-three/fiber'
-import { Suspense, useRef } from 'react'
+import { Suspense, useEffect, useRef } from 'react'
 import { SkateboardModel } from '@/components/Hero/SkateboardModel'
-import { Mesh, MeshStandardMaterial, RepeatWrapping } from 'three'
+import { Mesh, MeshStandardMaterial, RepeatWrapping, Vector3 } from 'three'
 import { useCustomizerControls } from './context'
 
 const ENVIRONMENT_COLOR = '#3b3a3a'
@@ -31,6 +31,38 @@ const Preview = () => {
 
 		cameraControlsRef.current.colliderMeshes = [floorRef.current]
 	}
+
+	const setCameraPositionOnChange = (target: Vector3, pos: Vector3) => {
+		if (!cameraControlsRef.current) return
+
+		cameraControlsRef.current.setTarget(target.x, target.y, target.z, true)
+		cameraControlsRef.current.setPosition(pos.x, pos.y, pos.z, true)
+	}
+
+	useEffect(() => {
+		setCameraPositionOnChange(new Vector3(0, 0.3, 0), new Vector3(1.5, 1, 1))
+	}, [selectedDeck])
+
+	useEffect(() => {
+		setCameraPositionOnChange(
+			new Vector3(0, 0.15, 0),
+			new Vector3(0.75, 1, 1.75)
+		)
+	}, [selectedWheel])
+
+	useEffect(() => {
+		setCameraPositionOnChange(
+			new Vector3(-0.12, 0.29, 0.57),
+			new Vector3(0.5, 0.4, 1)
+		)
+	}, [selectedTrucks])
+
+	useEffect(() => {
+		setCameraPositionOnChange(
+			new Vector3(-0.12, 0.29, 0.57),
+			new Vector3(0.3, 0.4, 1)
+		)
+	}, [selectedBolts])
 
 	return (
 		<Canvas camera={{ position: [2.5, 1, 0], fov: 50 }} shadows>
