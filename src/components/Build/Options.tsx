@@ -10,6 +10,7 @@ interface IOptions {
 	selectedOption?: TTextures | TColors
 	setSelectedTextureOption?: ({ name, url }: TTextures) => void
 	setSelectedColorOption?: ({ name, hex }: TColors) => void
+	defaultValue: string | null
 }
 
 const Options = ({
@@ -17,6 +18,7 @@ const Options = ({
 	colors,
 	selectedOption,
 	textures,
+	defaultValue,
 	setSelectedTextureOption,
 	setSelectedColorOption
 }: IOptions) => {
@@ -28,11 +30,7 @@ const Options = ({
 				</Heading>
 				<p className='text-zinc-300'>
 					<span className='text-zinc-500'>| </span>
-					{selectedOption
-						? selectedOption.name
-						: textures
-						? textures[0].name
-						: colors && colors[0].name}
+					{selectedOption ? selectedOption.name : defaultValue}
 				</p>
 			</div>
 			<div className='flex gap-2 flex-wrap'>
@@ -47,9 +45,8 @@ const Options = ({
 									height={36}
 									className={clsx(
 										'rounded-full w-9 h-9',
-										selectedOption &&
-											selectedOption.name === texture.name &&
-											'outline-2 outline-white'
+										selectedOption === texture && 'outline-2 outline-white',
+										defaultValue === texture.name && 'outline-2 outline-white'
 									)}
 									onClick={() =>
 										setSelectedTextureOption({
@@ -70,7 +67,8 @@ const Options = ({
 								style={{ background: color.hex }}
 								className={clsx(
 									'size-9 rounded-full',
-									selectedOption === color && 'outline-2 outline-white'
+									selectedOption === color && 'outline-2 outline-white',
+									defaultValue === color.name && 'outline-2 outline-white'
 								)}
 								onClick={() => setSelectedColorOption(color)}
 							/>

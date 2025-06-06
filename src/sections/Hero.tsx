@@ -22,7 +22,7 @@ const Hero = () => {
 						a board that is as real as the places you take it.
 					</div>
 					<ButtonLink
-						href='/build'
+						href='/build?wheel=black&deck=black+and+yellow&truck=black&bolt=black&bolts=dark+gray&trucks=dark+gray'
 						icon='skateboard'
 						size='lg'
 						className='z-20 mt-2 block'
