@@ -7,7 +7,7 @@ import InteractiveSkateboard from '@/components/Hero/InteractiveSkateboard'
 
 const Hero = () => {
 	return (
-		<Bounded className='bg-[var(--brand-pink)] relative h-dvh overflow-hidden bg-texture'>
+		<Bounded className='bg-brand-pink relative h-dvh overflow-hidden bg-texture'>
 			<div className='absolute inset-0 flex items-center pt-20'>
 				<WideLogo className='w-full text-[var(--brand-purple)] hidden opacity-20 mix-blend-multiply lg:block' />
 				<TallLogo className='w-full text-[var(--brand-purple)] opacity-20 mix-blend-multiply lg:hidden' />

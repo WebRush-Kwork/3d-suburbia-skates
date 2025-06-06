@@ -3,7 +3,6 @@ import { useEffect, useMemo, useRef } from 'react'
 import { useGLTF, useTexture } from '@react-three/drei'
 import { GLTF } from 'three-stdlib'
 import { useFrame } from '@react-three/fiber'
-import { TColors, TTextures } from '@/types/context.types'
 import gsap from 'gsap'
 
 type GLTFResult = GLTF & {
@@ -22,19 +21,19 @@ type GLTFResult = GLTF & {
 }
 
 interface ISkateboardModel {
-	wheelTextureProp?: TTextures
-	deckTextureProp?: TTextures
-	boltsColorProp?: TColors
-	trucksColorProp?: TColors
+	wheelTextureProp: string
+	deckTextureProp: string
+	boltsColorProp: string
+	trucksColorProp: string
 	isConstantRotation?: boolean
 	pose?: 'upright' | 'side'
 }
 
 export function SkateboardModel({
-	wheelTextureProp = { url: '/wheel-black.png', name: 'black' },
-	deckTextureProp = { url: '/black-and-yellow.png', name: 'black and yellow' },
-	boltsColorProp = { hex: '#333', name: 'grey' },
-	trucksColorProp = { hex: '#333', name: 'grey' },
+	wheelTextureProp,
+	deckTextureProp,
+	boltsColorProp,
+	trucksColorProp,
 	isConstantRotation = false,
 	pose = 'upright'
 }: ISkateboardModel) {
@@ -74,7 +73,7 @@ export function SkateboardModel({
 	const boltMaterial = useMemo(
 		() =>
 			new THREE.MeshStandardMaterial({
-				color: boltsColorProp.hex,
+				color: boltsColorProp,
 				metalness: 0.5,
 				roughness: 0.3
 			}),
@@ -90,7 +89,7 @@ export function SkateboardModel({
 	const truckMaterial = useMemo(
 		() =>
 			new THREE.MeshStandardMaterial({
-				color: trucksColorProp.hex,
+				color: trucksColorProp,
 				normalMap: metalNormal,
 				normalScale: new THREE.Vector2(0.3, 0.3),
 				metalness: 0.8,
@@ -99,7 +98,7 @@ export function SkateboardModel({
 		[trucksColorProp, metalNormal]
 	)
 
-	const deckTexture = useTexture(deckTextureProp.url)
+	const deckTexture = useTexture(deckTextureProp)
 	deckTexture.flipY = false
 	deckTexture.colorSpace = THREE.SRGBColorSpace
 
@@ -112,7 +111,7 @@ export function SkateboardModel({
 		[deckTexture]
 	)
 
-	const wheelTexture = useTexture(wheelTextureProp.url)
+	const wheelTexture = useTexture(wheelTextureProp)
 	wheelTexture.flipY = false
 	wheelTexture.colorSpace = THREE.SRGBColorSpace
 

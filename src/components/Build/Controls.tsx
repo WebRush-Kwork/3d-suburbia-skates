@@ -3,8 +3,10 @@
 import { wheelTextureUrls } from '@/data/wheels'
 import { deckTextureUrls } from '@/data/decks'
 import { useCustomizerControls } from '@/app/build/context'
-import Options from './Options'
 import { colors } from '@/data/colors'
+import { useRouter } from 'next/navigation'
+import Options from './Options'
+import { useEffect } from 'react'
 
 const Controls = () => {
 	const {
@@ -17,6 +19,19 @@ const Controls = () => {
 		selectedTrucks,
 		setSelectedTrucks
 	} = useCustomizerControls()
+
+	const { replace } = useRouter()
+
+	useEffect(() => {
+		const url = new URL(window.location.href)
+
+		if (selectedWheel) url.searchParams.set('wheel', selectedWheel.name)
+		if (selectedDeck) url.searchParams.set('deck', selectedDeck.name)
+		if (selectedTrucks) url.searchParams.set('trucks', selectedTrucks.name)
+		if (selectedBolts) url.searchParams.set('bolts', selectedBolts.name)
+
+		replace(url.href)
+	}, [replace, selectedWheel, selectedDeck, selectedBolts, selectedTrucks])
 
 	return (
 		<div className='flex flex-col gap-6 mb-6'>

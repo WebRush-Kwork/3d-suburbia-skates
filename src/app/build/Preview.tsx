@@ -14,7 +14,19 @@ import { useCustomizerControls } from './context'
 
 const ENVIRONMENT_COLOR = '#3b3a3a'
 
-const Preview = () => {
+interface IPreview {
+	defaultWheel: string
+	defaultDeck: string
+	defaultBolts: string
+	defaultTrucks: string
+}
+
+const Preview = ({
+	defaultWheel,
+	defaultDeck,
+	defaultBolts,
+	defaultTrucks
+}: IPreview) => {
 	const cameraControlsRef = useRef<CameraControls>(null)
 	const floorRef = useRef<Mesh>(null)
 
@@ -85,10 +97,10 @@ const Preview = () => {
 					<meshBasicMaterial visible={false} />
 				</mesh>
 				<SkateboardModel
-					wheelTextureProp={selectedWheel}
-					deckTextureProp={selectedDeck}
-					boltsColorProp={selectedBolts}
-					trucksColorProp={selectedTrucks}
+					wheelTextureProp={defaultWheel}
+					deckTextureProp={defaultDeck}
+					boltsColorProp={defaultBolts}
+					trucksColorProp={defaultTrucks}
 					pose='side'
 				/>
 				<CameraControls
