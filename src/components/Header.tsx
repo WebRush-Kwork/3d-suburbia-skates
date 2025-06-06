@@ -8,7 +8,7 @@ const Header = () => {
 		<header className='z-50 absolute inset-0 p-4 md:p-5 lg:p-6 h-32 md:h-40 lg:h-48'>
 			<div className='max-w-6xl grid grid-cols-[auto_auto] items-center gap-6 md:grid-cols-[1fr_auto_1fr] mx-auto'>
 				<Link href='/'>
-					<Logo className='text-[var(--brand-purple)] h-12 md:h-14 lg:h-16 xl:h-20' />
+					<Logo className='text-[#692e54] h-12 md:h-14 lg:h-16 xl:h-20' />
 				</Link>
 				<Nav />
 				<div className='justify-self-end'>

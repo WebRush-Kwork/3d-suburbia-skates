@@ -42,7 +42,7 @@ const ProductGrid = () => {
 						<div className='-mb-1 py-4 overflow-hidden'>
 							<Scribble className='absolute inset-0' color={product.colorHex} />
 							<Image
-								src={product.url}
+								src={product.image}
 								alt={product.text}
 								width={150}
 								height={150}
@@ -54,7 +54,7 @@ const ProductGrid = () => {
 							{product.text}
 						</div>
 						<div className='absolute inset-0 flex justify-center items-center opacity-0 group-hover:opacity-100 duration-200'>
-							<ButtonLink>Customize</ButtonLink>
+							<ButtonLink href={product.url}>Customize</ButtonLink>
 						</div>
 					</div>
 				))}
