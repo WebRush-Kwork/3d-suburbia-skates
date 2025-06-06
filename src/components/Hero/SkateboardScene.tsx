@@ -169,11 +169,7 @@ const SkateboardScene = () => {
 			<group ref={originRef}>
 				<group ref={groupRef} position={[-0.25, 0, -0.635]}>
 					<group position={[0, -0.086, 0.635]}>
-						<SkateboardModel
-							wheelTextureUrl='/wheel-yellow.png'
-							deckTextureUrl='/yellow-and-black.png'
-							isConstantRotation={true}
-						/>
+						<SkateboardModel isConstantRotation={true} />
 						<Hotspot
 							isVisible={!isAnimating && isHotspotShown.front}
 							position={[0, 0.38, 1]}
