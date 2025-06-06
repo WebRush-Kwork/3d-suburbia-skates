@@ -18,7 +18,7 @@ const Hotspot = ({ position, isVisible, color = '#e6fc6a' }: IHotspot) => {
 				<meshStandardMaterial color={color} transparent />
 			</mesh>
 			<mesh
-				visible={isVisible}
+				visible={true}
 				onPointerOver={() => (document.body.style.cursor = 'pointer')}
 				onPointerOut={() => (document.body.style.cursor = 'default')}
 			>

@@ -9,8 +9,8 @@ const Hero = () => {
 	return (
 		<Bounded className='bg-brand-pink relative h-dvh overflow-hidden bg-texture'>
 			<div className='absolute inset-0 flex items-center pt-20'>
-				<WideLogo className='w-full text-[var(--brand-purple)] hidden opacity-20 mix-blend-multiply lg:block' />
-				<TallLogo className='w-full text-[var(--brand-purple)] opacity-20 mix-blend-multiply lg:hidden' />
+				<WideLogo className='w-full text-[#692e54] hidden opacity-20 mix-blend-multiply lg:block' />
+				<TallLogo className='w-full text-[#692e54] opacity-20 mix-blend-multiply lg:hidden' />
 			</div>
 			<div className='grid absolute inset-0 mx-auto mt-24 max-w-6xl grid-rows-1 px-6 py-10 lg:py-12 xl:py-16'>
 				<Heading className='max-w-2xl relative' size='xl'>
