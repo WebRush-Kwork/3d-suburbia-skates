@@ -21,19 +21,19 @@ type GLTFResult = GLTF & {
 }
 
 interface ISkateboardModel {
-	wheelTextureProp: string
-	deckTextureProp: string
-	boltsColorProp: string
-	trucksColorProp: string
+	wheelTextureProp?: string
+	deckTextureProp?: string
+	boltsColorProp?: string
+	trucksColorProp?: string
 	isConstantRotation?: boolean
 	pose?: 'upright' | 'side'
 }
 
 export function SkateboardModel({
-	wheelTextureProp,
-	deckTextureProp,
-	boltsColorProp,
-	trucksColorProp,
+	wheelTextureProp = '/wheel-cream.png',
+	deckTextureProp = '/skateboard/Deck.webp',
+	boltsColorProp = '#333',
+	trucksColorProp = '#333',
 	isConstantRotation = false,
 	pose = 'upright'
 }: ISkateboardModel) {
