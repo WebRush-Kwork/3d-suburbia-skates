@@ -1,5 +1,6 @@
 import { ButtonLink } from '@/components/ButtonLink'
 import { Heading } from '@/components/Heading'
+import Controls from './Controls'
 
 const Sidebar = () => {
 	return (
@@ -7,6 +8,7 @@ const Sidebar = () => {
 			<Heading size='sm' className='mb-6'>
 				Build your board
 			</Heading>
+			<Controls />
 			<ButtonLink icon='plus' color='lime'>
 				Add to cart
 			</ButtonLink>

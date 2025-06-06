@@ -3,6 +3,7 @@ import { useEffect, useMemo, useRef } from 'react'
 import { useGLTF, useTexture } from '@react-three/drei'
 import { GLTF } from 'three-stdlib'
 import { useFrame } from '@react-three/fiber'
+import { TColors, TTextures } from '@/types/context.types'
 import gsap from 'gsap'
 
 type GLTFResult = GLTF & {
@@ -21,15 +22,19 @@ type GLTFResult = GLTF & {
 }
 
 interface ISkateboardModel {
-	wheelTextureUrl: string
-	deckTextureUrl: string
+	wheelTextureProp?: TTextures
+	deckTextureProp?: TTextures
+	boltsColorProp?: TColors
+	trucksColorProp?: TColors
 	isConstantRotation?: boolean
 	pose?: 'upright' | 'side'
 }
 
 export function SkateboardModel({
-	wheelTextureUrl,
-	deckTextureUrl,
+	wheelTextureProp = { url: '/wheel-black.png', name: 'black' },
+	deckTextureProp = { url: '/black-and-yellow.png', name: 'black and yellow' },
+	boltsColorProp = { hex: '#333', name: 'grey' },
+	trucksColorProp = { hex: '#333', name: 'grey' },
 	isConstantRotation = false,
 	pose = 'upright'
 }: ISkateboardModel) {
@@ -66,19 +71,16 @@ export function SkateboardModel({
 		return material
 	}, [gripTapeDiffuse, gripTapeRoughness])
 
-	const boltColor = '#34495E'
-
 	const boltMaterial = useMemo(
 		() =>
 			new THREE.MeshStandardMaterial({
-				color: boltColor,
+				color: boltsColorProp.hex,
 				metalness: 0.5,
 				roughness: 0.3
 			}),
-		[boltColor]
+		[boltsColorProp]
 	)
 
-	const truckColor = '#34495E'
 	const metalNormal = useTexture('/skateboard/metal-normal.avif')
 	metalNormal.wrapS = THREE.RepeatWrapping
 	metalNormal.wrapT = THREE.RepeatWrapping
@@ -88,16 +90,16 @@ export function SkateboardModel({
 	const truckMaterial = useMemo(
 		() =>
 			new THREE.MeshStandardMaterial({
-				color: truckColor,
+				color: trucksColorProp.hex,
 				normalMap: metalNormal,
 				normalScale: new THREE.Vector2(0.3, 0.3),
 				metalness: 0.8,
 				roughness: 0.25
 			}),
-		[truckColor, metalNormal]
+		[trucksColorProp, metalNormal]
 	)
 
-	const deckTexture = useTexture(deckTextureUrl)
+	const deckTexture = useTexture(deckTextureProp.url)
 	deckTexture.flipY = false
 	deckTexture.colorSpace = THREE.SRGBColorSpace
 
@@ -110,7 +112,7 @@ export function SkateboardModel({
 		[deckTexture]
 	)
 
-	const wheelTexture = useTexture(wheelTextureUrl)
+	const wheelTexture = useTexture(wheelTextureProp.url)
 	wheelTexture.flipY = false
 	wheelTexture.colorSpace = THREE.SRGBColorSpace
 
@@ -146,7 +148,7 @@ export function SkateboardModel({
 				ease: 'circ.out'
 			})
 		}
-	}, [isConstantRotation, wheelTextureUrl])
+	}, [isConstantRotation, wheelTexture])
 
 	const positions = useMemo(
 		() =>

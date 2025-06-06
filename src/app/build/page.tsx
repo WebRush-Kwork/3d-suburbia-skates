@@ -1,10 +1,8 @@
 import { Logo } from '@/components/Logo'
 import { CustomizerControlsProvider } from './context'
-import { wheelTextureUrls } from '@/data/textures'
-import { deckTextureUrls } from '@/data/decks'
 import Sidebar from '@/components/Build/Sidebar'
-import Link from 'next/link'
 import Preview from './Preview'
+import Link from 'next/link'
 
 const BuildPage = () => {
 	return (
@@ -12,10 +10,7 @@ const BuildPage = () => {
 			<CustomizerControlsProvider>
 				<div className='lg:grow aspect-square lg:aspect-auto'>
 					<div className='absolute inset-0'>
-						<Preview
-							wheelTextureUrls={wheelTextureUrls}
-							deckTextureUrls={deckTextureUrls}
-						/>
+						<Preview />
 					</div>
 					<Link href='/' className='absolute top-6 left-6'>
 						<Logo className='h-12 text-white' />

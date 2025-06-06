@@ -8,27 +8,32 @@ import {
 } from '@react-three/drei'
 import { Canvas } from '@react-three/fiber'
 import { Suspense, useRef } from 'react'
-import { useCustomizerControls } from './context'
 import { SkateboardModel } from '@/components/Hero/SkateboardModel'
-import { MeshStandardMaterial, RepeatWrapping } from 'three'
+import { Mesh, MeshStandardMaterial, RepeatWrapping } from 'three'
+import { useCustomizerControls } from './context'
 
-interface IPreview {
-	wheelTextureUrls: string[]
-	deckTextureUrls: string[]
-}
+const ENVIRONMENT_COLOR = '#3b3a3a'
 
-const Preview = ({ wheelTextureUrls, deckTextureUrls }: IPreview) => {
+const Preview = () => {
 	const cameraControlsRef = useRef<CameraControls>(null)
+	const floorRef = useRef<Mesh>(null)
 
-	// const wheelTextureUrl = wheelTextureUrls[0]
-	// const deckTextureUrl = deckTextureUrls[0]
-	const wheelTextureUrl = '/skateboard/SkateWheel1.png'
-	const deckTextureUrl = '/skateboard/Deck.webp'
-	const truckColor = '#6f6e6a'
-	const boltColor = '#6f6e6a'
+	const { selectedDeck, selectedWheel, selectedBolts, selectedTrucks } =
+		useCustomizerControls()
+
+	const onCameraControlStart = () => {
+		if (
+			!cameraControlsRef.current ||
+			!floorRef.current ||
+			cameraControlsRef.current.colliderMeshes.length > 0
+		)
+			return
+
+		cameraControlsRef.current.colliderMeshes = [floorRef.current]
+	}
 
 	return (
-		<Canvas shadows>
+		<Canvas camera={{ position: [2.5, 1, 0], fov: 50 }} shadows>
 			<Suspense fallback={null}>
 				<Environment
 					files='/hdr/warehouse-512.hdr'
@@ -40,16 +45,25 @@ const Preview = ({ wheelTextureUrls, deckTextureUrls }: IPreview) => {
 					position={[1, 1, 1]}
 					intensity={1.6}
 				/>
+				<fog attach='fog' args={[ENVIRONMENT_COLOR, 3, 10]} />
+				<color attach='background' args={[ENVIRONMENT_COLOR]} />
 				<StageFloor />
+				<mesh rotation={[-Math.PI / 2, 0, 0]} ref={floorRef}>
+					<planeGeometry args={[6, 6]} />
+					<meshBasicMaterial visible={false} />
+				</mesh>
 				<SkateboardModel
-					wheelTextureUrl={wheelTextureUrl}
-					deckTextureUrl={deckTextureUrl}
+					wheelTextureProp={selectedWheel}
+					deckTextureProp={selectedDeck}
+					boltsColorProp={selectedBolts}
+					trucksColorProp={selectedTrucks}
 					pose='side'
 				/>
 				<CameraControls
 					ref={cameraControlsRef}
 					minDistance={0.2}
 					maxDistance={4}
+					onStart={onCameraControlStart}
 				/>
 			</Suspense>
 			<Preload all />
@@ -66,11 +80,9 @@ function StageFloor() {
 	normalMap.repeat.set(30, 30)
 	normalMap.anisotropy = 8
 
-	const environmentColor = '#3b3a3a'
-
 	const material = new MeshStandardMaterial({
 		roughness: 0.75,
-		color: environmentColor,
+		color: ENVIRONMENT_COLOR,
 		normalMap
 	})
 
