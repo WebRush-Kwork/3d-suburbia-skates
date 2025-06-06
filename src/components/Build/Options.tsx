@@ -28,7 +28,11 @@ const Options = ({
 				</Heading>
 				<p className='text-zinc-300'>
 					<span className='text-zinc-500'>| </span>
-					{selectedOption?.name}
+					{selectedOption
+						? selectedOption.name
+						: textures
+						? textures[0].name
+						: colors && colors[0].name}
 				</p>
 			</div>
 			<div className='flex gap-2 flex-wrap'>
@@ -42,8 +46,9 @@ const Options = ({
 									width={36}
 									height={36}
 									className={clsx(
-										'rounded-full',
-										selectedOption?.name === texture.name &&
+										'rounded-full w-9 h-9',
+										selectedOption &&
+											selectedOption.name === texture.name &&
 											'outline-2 outline-white'
 									)}
 									onClick={() =>

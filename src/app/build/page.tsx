@@ -6,6 +6,7 @@ import Link from 'next/link'
 import { wheelTextureUrls } from '@/data/wheels'
 import { deckTextureUrls } from '@/data/decks'
 import { colors } from '@/data/colors'
+import Loading from './Loading'
 
 interface ISearchParams {
 	wheel?: string
@@ -45,6 +46,7 @@ const BuildPage = async (params: { searchParams: Promise<ISearchParams> }) => {
 				</div>
 				<Sidebar />
 			</CustomizerControlsProvider>
+			<Loading />
 		</div>
 	)
 }
